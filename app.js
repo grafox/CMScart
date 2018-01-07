@@ -1,6 +1,15 @@
 let express = require('express');
 let path = require('path');
 const mongoose = require('mongoose');
+let config = require('./config/database');
+// Connect DB
+
+mongoose.connect(config.database);
+let db = mongoose.connection;
+db.on('error', console.error.bind(console,'connection error:'));
+db.once('open',function(){
+    console.log('Connected to MongoDB')
+});
 
 //init app
 
